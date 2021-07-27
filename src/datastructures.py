@@ -17,19 +17,19 @@ class FamilyStructure:
             "id": self._generateId(),
             "first_name": "John",
             "last_name": "Jackson",
-            "years": 33,
+            "age": 33,
             "lucky_numbers": [7,13,22]
         },{
             "id": self._generateId(),
             "first_name": "Jane",
             "last_name": "Jackson",
-            "years": 35,
+            "age": 35,
             "lucky_numbers": [10,14,3]
         } ,{
             "id": self._generateId(),
             "first_name": "Jimmy",
             "last_name": "Jackson",
-            "years": 5,
+            "age": 5,
             "lucky_numbers": [1]
         }]
 
@@ -39,16 +39,44 @@ class FamilyStructure:
 
     def add_member(self, member):
         # fill this method and update the return
-        
-        pass
+        n_member = dict()
+        n_member["first_name"]= str(member["first_name"])
+        n_member["last_name"]=self.last_name
+        n_member["age"]=int(member["age"])
+        n_member["lucky_numbers"]=list(member["lucky_numbers"])
 
-    def delete_member(self, id):
-        # fill this method and update the return
-        pass
+        if "id" in member:
+            n_member["id"]=member["id"]
+        else:
+            n_member["id"]=self._generateId()
+ 
+        self._members.append(n_member)
+        return n_member
 
     def get_member(self, id):
         # fill this method and update the return
-        pass
+        members=self.get_all_members()
+        for index in range(len(members)):
+            if (members[index]['id'] == id):
+                return members[index]
+
+    def delete_member(self, id):
+        # fill this method and update the return
+        members=self.get_all_members()
+        for index in range(len(members)):
+            if members[index]["id"] == id:
+                members.pop(index)
+                msg={"done": True}    
+                return msg
+
+    def update_member(self, member,id):
+        members=self.get_all_members()
+        for index in range(len(members)):
+            if members[index]["id"] == id:
+                members[index].update(member)
+                msg={"done": True}    
+                return msg
+
 
     # this method is done, it returns a list with all the family members
     def get_all_members(self):
